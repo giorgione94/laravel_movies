@@ -18,19 +18,30 @@
                         @foreach ($movies as $movie)
                             <div class="col">
                                 <div class="card" style="width: 18rem;">
-                                    <img src="{{ $movie->image }}" class="card-img-top">
+
+                                    <a href="{{ route('movies.show', $movie->id) }}">
+                                        <img src="{{ $movie->image }}" class="card-img-top">
+                                    </a>
+
                                     <div class="card-body">
-                                        <h3>
-                                            <a href="{{ route('movies.show', $movie->id) }}">
-                                                {{ $movie->title }}
-                                            </a>
+
+                                        <h3 class="text-center">
+                                            {{ $movie->title }}
                                         </h3>
+
                                         <div class="text-danger mt-3">
                                             @for ($i = 1; $i <= $movie->rating_star; $i++)
                                                 <i class="fas fa-star"></i>
                                             @endfor
                                         </div>
-                                        <p class="text mt-2"> {{ Str::limit($movie->description, 100) }} </p>
+
+                                        <div>
+                                            <p class="text mt-2"> {{ $movie->release_year }} </p>
+                                        </div>
+
+                                        <div>
+                                            <p class="text mt-2"> {{ Str::limit($movie->description, 100) }} </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

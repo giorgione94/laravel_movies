@@ -10,9 +10,11 @@ class Movie extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'image',
         'description',
-        'rating_star'
+        'genre',
+        'release_year',
+        'rating_star',
+        'image'
     ];
     public function casts() {
         return $this->belongsToMany(Cast::class)->withPivot('role');
