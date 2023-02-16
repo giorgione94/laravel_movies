@@ -2,58 +2,71 @@
 
 
 @section('content')
+
     <div class="col d-flex justify-content-center">
-        <div class="card my-5">
 
-            <img src="{{ $movie->image }}" class="card-img-top" style="width: 18rem;">
-
-            <div class="card-body">
-
-                <h1>{{ $movie->title }}</h1>
-
-                <p> {{ $movie->description }} </p>
-
-                <p> {{ $movie->genre }} </p>
-
-                <p> {{ $movie->release_year }} </p>
-
-                <div class="text-danger mb-3">
-                    @for ($i = 1; $i <= $movie->rating_star; $i++)
-                        <i class="fas fa-star"></i>
-                    @endfor
-                </div>
-
-                <div>
-                    <h3 class="text">Cast
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </h3>
-
-                    <ul class="list-group list-group-flush">
-                        @if (count($movie->casts))
-                            @foreach ($movie->casts as $cast)
-                                <li class="list-group-item">{{ $cast->name }} -
-                                    <span class="text-muted font-italic">{{ $cast->pivot->role }}</span>
+        <div class="card my-4">
+            <div class="card m-3" style="widht:18rem;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ $movie->image }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h1 class="card-title text-center"> {{ $movie->title }} </h1>
+                            <p>{{ $movie->description }}</p>
+                            <p> {{ $movie->genre }} </p>
+                            <p> {{ $movie->release_year }} </p>
+                            <div class="text-danger mb-3">
+                                @for ($i = 1; $i <= $movie->rating_star; $i++)
+                                    <i class="fas fa-star"></i>
+                                @endfor
+                            </div>
+                            <div>
+                                <h2 class="text-center">Cast
                                     @auth
-                                        <form action="{{ route('movie_cast_destroy', [$movie->id, $cast->id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-link text-danger">Delete</button>
-                                        </form>
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
                                     @endauth
-                                </li>
-                            @endforeach
-                        @else
-                            No Casts!
-                        @endif
-                    </ul>
-                </div>
+                                </h2>
 
+                                <ul class="list-group list-group-flush">
+                                    @if (count($movie->casts))
+                                        @foreach ($movie->casts as $cast)
+                                            <li class="list-group-item">
+                                                <a href="{{ route('casts.show', $cast->id) }}">
+                                                    {{ $cast->name }}
+                                                </a> -
+                                                <span class="text-muted font-italic">
+                                                    {{ $cast->pivot->role }}
+                                                </span>
+                                                @auth
+                                                    <form action="{{ route('movie_cast_destroy', [$movie->id, $cast->id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-link float-end">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                @endauth
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        No Casts!
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card m-3" style="widht:18rem;">
                 <div>
-                    <h3 class="text mt-3">Comments</h3>
+                    <h3 class="text-center">Comments</h3>
 
                     <ul class="list-group list-group-flush">
                         @if (count($movie->comments))
@@ -69,20 +82,21 @@
                                 </li>
                             @endforeach
                         @else
-                            No Comments!
+                            <p class="m-2"> No Comments! </p>
                         @endif
 
                     </ul>
                 </div>
 
                 <div class="mt-3">
-                    <form action="{{ route('movies.comments.store', $movie->id) }}" method="POST">
-                        @csrf
-                        <input type="text" name="comment" class="form-control" placeholder="say something...">
-                        <button type="submit" class="btn btn-primary mt-2 float-end">Comment</button>
-                    </form>
+                    @auth
+                        <form action="{{ route('movies.comments.store', $movie->id) }}" method="POST">
+                            @csrf
+                            <input type="text" name="comment" class="form-control" placeholder="say something...">
+                            <button type="submit" class="btn btn-primary mt-2 float-end">Comment</button>
+                        </form>
+                    @endauth
                 </div>
-
             </div>
 
             @auth
@@ -95,6 +109,7 @@
                 </div>
             @endauth
         </div>
+
 
         @auth
             <!-- Modal -->
