@@ -2,11 +2,14 @@
 
 @section('content')
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <h1 class="text-light mb-3">
                     All Movies
-                    <a href="{{ route('movies.create') }}" class="btn btn-primary btn-sm fas fa-plus"></a>
+                    @auth
+                        <a href="{{ route('movies.create') }}" class="btn btn-primary btn-sm fas fa-plus"></a>
+                    @endauth
                 </h1>
 
                 @unless(count($movies))

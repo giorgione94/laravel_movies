@@ -16,7 +16,7 @@
                         </div>
 
                         <div>
-                            <p>Descrizione Attore</p>
+                            <p class="text"> {{ $cast->description }} </p>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
 
         <div class="card-body">
 
-            <h1 class="text">All Movies</h1>
+            <h1 class="text-center">All Movies Of {{ $cast->name }}</h1>
 
             <ul class="list-group list-group-flush">
                 

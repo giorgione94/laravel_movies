@@ -17,6 +17,7 @@ class CreateCastsTable extends Migration
             $table->id();
             $table->text('image');
             $table->string('name');
+            $table->longText('description');
             $table->timestamps();
         });
     }
