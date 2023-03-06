@@ -2,11 +2,9 @@
 
 @section('content')
     <div class="container">
-
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <h1 class="text-light mb-3">
-                    All Movies
                     @auth
                         <a href="{{ route('movies.create') }}" class="btn btn-primary btn-sm fas fa-plus"></a>
                     @endauth
@@ -43,7 +41,7 @@
                                         </div>
 
                                         <div>
-                                            <p class="text mt-2"> {{ Str::limit($movie->description, 100) }} </p>
+                                            <p class="text mt-2"> {{ Str::limit($movie->description, 150) }} </p>
                                         </div>
                                     </div>
                                 </div>

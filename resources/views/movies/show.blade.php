@@ -161,6 +161,10 @@
                                             <input type="text" name="cast_name" id="" class="form-control">
                                         </div>
                                         <div class="form-group">
+                                            <label for="">Description</label>
+                                            <textarea class="form-control" name="cast_description" rows="10"></textarea>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="">Actor Image</label>
                                             <input type="text" name="cast_image" id="" class="form-control">
                                         </div>
